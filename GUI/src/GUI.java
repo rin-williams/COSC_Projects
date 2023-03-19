@@ -30,19 +30,18 @@ public class GUI implements ActionListener {
 
         label.setText("Insert 3 values:");
         label.setHorizontalAlignment(JLabel.CENTER);
-        label.setPreferredSize(new Dimension(100, 25));
 
         // input fields
         for (int i = 0; i < 3; i++) {
             inputField[i] = new JTextField();
             x[i] = new JLabel();
-            inputField[i].setPreferredSize(new Dimension(30, 30));
+            inputField[i].setPreferredSize(new Dimension(0, 25));
             inputField[i].setColumns(3);
             inputField[i].setHorizontalAlignment(JTextField.CENTER);
         }
-        x[0].setText(" x² ");
-        x[1].setText(" x ");
-        x[2].setText(" constant ");
+        x[0].setText("<html>x<sup>2</sup></html>");
+        x[1].setText("<html>x</html>");
+        x[2].setText("<html>constant</html>");
 
         submit = new JButton("Submit");
         submit.addActionListener(this);
@@ -51,10 +50,11 @@ public class GUI implements ActionListener {
 
         // panel
         panel = new JPanel();
-        panel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        panel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
+        panel.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
-        int panelSizeX = 0;
+        int panelSizeX = 25;
         int panelSizeY = 5;
 
         JPanel labelPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -63,6 +63,7 @@ public class GUI implements ActionListener {
         panel.add(labelPanel);
 
         JPanel inputPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        inputPanel.setAlignmentX(JPanel.CENTER_ALIGNMENT);
         inputPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, panelSizeY, panelSizeX));
         inputPanel.add(inputField[0]);
         inputPanel.add(x[0]);
@@ -70,6 +71,7 @@ public class GUI implements ActionListener {
         inputPanel.add(x[1]);
         inputPanel.add(inputField[2]);
         inputPanel.add(x[2]);
+        inputPanel.setAlignmentX(JPanel.CENTER_ALIGNMENT);
         panel.add(inputPanel);
 
         JPanel answerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -84,16 +86,17 @@ public class GUI implements ActionListener {
 
         frame.add(panel, BorderLayout.CENTER);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setTitle("Quadratics equator");
+        frame.setTitle("quad calc");
         frame.pack();
         frame.setLocationRelativeTo(null);
+        frame.setResizable(true);
         frame.setVisible(true);
 
     }
 
     public static void main(String[] args) {
         new GUI();
-        System.out.println("Program executed successfully.");
+        System.out.println("Program executed successfully :3");
     }
 
     @Override
@@ -112,7 +115,7 @@ public class GUI implements ActionListener {
 
             }
         } catch (NumberFormatException exception) {
-            answer.setText("please enter numbers!");
+            answer.setText("please enter numbers :3");
 
         }
         // setting vars to calculate
@@ -122,9 +125,9 @@ public class GUI implements ActionListener {
         c = num[2];
 
         if (a == 0 && b == 0 && c == 0) {
-            answer.setText("please enter numbers!");
+            answer.setText("please enter numbers :3");
         } else if (a == 0 && b == 0) {
-            answer.setText("cannot calculate with just a constant!");
+            answer.setText("cannot calculate with just a constant :3");
         } else if (a == 0) {
             answer.setText(calculate.linear(b, c));
         } else if (b == 0) {
